@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :addComment]
 
   # GET /posts
   # GET /posts.json
@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   
   def show
-    # QUESTION: So show.html.erb has access to @post from the before_action here?
+    @comment = Comment.new
   end
 
   # GET /posts/new
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    # QUESTION: What is respond_to doing again?
+    
     respond_to do |format|
     if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -63,10 +63,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def addComment 
+    # post = Post.find(params[:id])
+    @post.comments.create({body: params[:body]})
+    redirect_to @post
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      # QUESTION: Where does params come from again?
       @post = Post.find(params[:id])
     end
 

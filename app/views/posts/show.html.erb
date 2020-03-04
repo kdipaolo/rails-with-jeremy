@@ -10,5 +10,30 @@
   <%= @post.description %>
 </p>
 
+<h4>Add new comment</h4>
+
+<%= form_with(url: '/add-comment', method: 'post') do |form| %>
+  <%= form.hidden_field :id, value: @post.id %>
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<h4>Comments:</h4>
+  <ul>
+    <% @post.comments.each do |comment| %>
+        <li><%= comment.body %></li> 
+    <% end %>
+  </ul>
+
+<br />
+
+
+
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
