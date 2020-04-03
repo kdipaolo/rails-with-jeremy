@@ -9,5 +9,17 @@ Rails.application.routes.draw do
   match '/add-comment' => 'posts#addComment', via: :post
 
   # match '/star-wars' => 'pages#get_star_wars', via: :get
+  
+  controller :users do 
+    get 'signup' => :new
+    post 'signup' => :create
+  end
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create 
+    delete 'logout' => :destroy
+  end
 
 end
+

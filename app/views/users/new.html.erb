@@ -1,0 +1,22 @@
+<h1>Sign Up</h1>
+
+<%= form_with(url: signup_path, local: true) do |form| %>
+<div class="field">
+    <%= form.label :name, 'Name' %>
+    <%= form.text_field :name, autocomplete: 'off' %>
+</div>
+<div class="field">
+    <%= form.label :email, 'Email' %>
+    <%= form.text_field :email, autocomplete: 'off' %>
+</div>
+<div class="field">
+    <%= form.label :password, 'Password' %>
+    <%= form.password_field :password  %>
+</div>
+<div class="field">
+    <%= form.label :password_confirmation, 'Confirm Password' %>
+    <%= form.password_field :password_confirmation  %>
+</div>
+<%= submit_tag("Sign Up") %>
+
+<% end %>
