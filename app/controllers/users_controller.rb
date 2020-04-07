@@ -1,12 +1,12 @@
 class UsersController < ApplicationController 
     def create 
-        puts 'whaaa'
-        puts user_params
-
         @user = User.new(user_params)
-        @user.save
-
-
+        if @user.save
+            reset_session
+            session[:user_id] = @user.id
+            redirect_to posts_url, notice: "Hello #{@user.email}, welcome!"
+        end
+        
     end
 
     def user_params
