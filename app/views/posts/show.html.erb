@@ -1,35 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @post.title %>
+    <strong>Title:</strong>
+    <%= @post.title %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @post.description %>
+    <strong>Description:</strong>
+    <%= @post.description %>
 </p>
 
 <h4>Add new comment</h4>
 
 <%= form_with(model: [@post, @comment], local: true) do |form| %>
 
-  <div class="field">
+<div class="field">
     <%= form.label :body %>
     <%= form.text_area :body %>
-  </div>
+</div>
 
-  <div class="actions">
+<div class="actions">
     <%= form.submit %>
-  </div>
+</div>
 <% end %>
 
 <h4>Comments:</h4>
-  <ul>
+<ul>
     <% @post.comments.each do |comment| %>
-        <li><%= comment.body %></li> 
+    <li><%= comment.body %> - <%= comment.user.name %></li>
     <% end %>
-  </ul>
+</ul>
 
 <br />
 
