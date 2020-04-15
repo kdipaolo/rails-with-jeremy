@@ -1,9 +1,7 @@
 class CommentsController < ApplicationController
     def create 
         @post = Post.find(params[:post_id])
-
-        final_params = {"body"=> comment_params[:body], "user_id" => current_user[:id]}
-        @comment = @post.comments.build(final_params)
+        @comment = @post.comments.build(comment_params.merge({user: current_user}))
         
         if @comment.save 
             redirect_to @post
