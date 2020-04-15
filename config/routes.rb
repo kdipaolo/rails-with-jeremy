@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
+  root to: "posts#index"
+  
   resources :posts do 
     resources :comments
   end
   
-  # root to: "pages#index"
-
-  match '/add-comment' => 'posts#addComment', via: :post
-
   controller :users do 
     get 'signup' => :new
     post 'signup' => :create
@@ -17,6 +15,5 @@ Rails.application.routes.draw do
     post 'login' => :create 
     delete 'logout' => :destroy
   end
-
 end
 
