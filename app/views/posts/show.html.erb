@@ -10,6 +10,11 @@
     <%= @post.description %>
 </p>
 
+<p>
+    <strong>Author:</strong>
+    <%= @post.user ? @post.user.name : 'anonymous' %>
+</p>
+
 <h4>Add new comment</h4>
 
 <%= form_with(model: [@post, @comment], local: true) do |form| %>
