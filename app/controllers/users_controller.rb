@@ -6,6 +6,7 @@ class UsersController < ApplicationController
         if @user.save
             reset_session
             session[:user_id] = @user.id
+            UserMailer.with(user: @user).welcome_email.deliver_later
             redirect_to posts_url, notice: "Hello #{@user.email}, welcome!"
         end
         
