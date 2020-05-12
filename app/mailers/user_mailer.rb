@@ -14,4 +14,9 @@ class UserMailer < ApplicationMailer
 
         mail(to: @post.user.email, subject: "#{@currentUser.name} has commented on one of your posts!")
     end
+
+    def forgot_password_email
+        @user = params[:user]
+        mail(to: "kurt@test.com", subject: "Password Reset")
+    end
 end

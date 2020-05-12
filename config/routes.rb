@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   controller :sessions do
     get 'login' => :new
     post 'login' => :create 
-    delete 'logout' => :destroy
+    delete 'logout' => :destroy  
   end
+  # TODO: Want this to be password_reset but was seeing errors when i was trying to make that name change
+  resource :password, except: :edit do
+    get 'edit/:password_reset_token', on: :member, to: 'passwords#edit', as: 'edit'
+  end
+
 end
 
