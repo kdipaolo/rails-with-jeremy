@@ -1,45 +1,28 @@
 <p id="notice"><%= notice %></p>
+<article>
+    <h1><%= @post.title %></h1>
+    <h2><%= @post.description %></h2>
+    <h3><%= @post.user ? @post.user.name : 'anonymous' %></h3>
 
-<p>
-    <strong>Title:</strong>
-    <%= @post.title %>
-</p>
+    <h4>Comments:</h4>
+    <ul>
+        <% @post.comments.each do |comment| %>
+        <li><%= comment.body %> - <%= comment.user.name %></li>
+        <% end %>
+    </ul>
 
-<p>
-    <strong>Description:</strong>
-    <%= @post.description %>
-</p>
+    <h4>Add new comment</h4>
 
-<p>
-    <strong>Author:</strong>
-    <%= @post.user ? @post.user.name : 'anonymous' %>
-</p>
-
-<h4>Add new comment</h4>
-
-<%= form_with(model: [@post, @comment], local: true) do |form| %>
-
-<div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-</div>
-
-<div class="actions">
-    <%= form.submit %>
-</div>
-<% end %>
-
-<h4>Comments:</h4>
-<ul>
-    <% @post.comments.each do |comment| %>
-    <li><%= comment.body %> - <%= comment.user.name %></li>
+    <%= form_with(model: [@post, @comment], local: true) do |form| %>
+        <div class="field">
+            <%= form.text_area :body %>
+        </div>
+        <div class="actions">
+            <%= form.submit %>
+        </div>
     <% end %>
-</ul>
 
-<br />
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Back', posts_path %>
 
-
-
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+</article>
